@@ -1,0 +1,57 @@
+// @import '../../styles/colors.scss';
+
+.loaderContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  top: 0;
+  text-align: center;
+}
+
+.fullSize {
+  height: 100%;
+  width: 100%;
+}
+
+.loader {
+  animation: animate 0.75s 0s infinite linear;
+  animation-fill-mode: both;
+  background: transparent !important;
+  border-radius: 100%;
+  border: 4px solid;
+  border-color: blue;
+  border-bottom-color: transparent;
+  display: inline-block;
+  height: 20px;
+  margin: 0 5px;
+  width: 20px;
+}
+
+.loaderText {
+  color: white;
+  font-size: 32px;
+  font-weight: 600;
+  margin: 1rem;
+  text-align: center;
+}
+
+.version {
+  color: blue;
+  font-size: 0.7rem;
+  margin: 1rem;
+  text-align: center;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}

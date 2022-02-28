@@ -1,0 +1,7 @@
+.container {
+  justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center !important;
+  flex-direction: row;
+}
