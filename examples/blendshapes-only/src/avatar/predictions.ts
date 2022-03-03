@@ -16,7 +16,7 @@ export class AvatarPredictions {
 
     this.predictor = new AUPredictor({
       apiToken: process.env.REACT_APP_AVATAR_WEBKIT_AUTH_TOKEN!,
-      mediaStream: this.videoStream
+      srcVideoStream: this.videoStream
     })
 
     this.predictor.onPredict = ((results: AvatarPrediction) => {
