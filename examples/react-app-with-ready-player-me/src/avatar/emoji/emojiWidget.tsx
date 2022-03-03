@@ -55,7 +55,7 @@ class EmojiWidget extends React.Component<Props, State> {
 
     this.predictor = new AUPredictor({
       apiToken: process.env.REACT_APP_AVATAR_WEBKIT_AUTH_TOKEN,
-      mediaStream: stream,
+      srcVideoStream: stream,
       videoReversed: true
     } as AUPredictorConfig)
 
