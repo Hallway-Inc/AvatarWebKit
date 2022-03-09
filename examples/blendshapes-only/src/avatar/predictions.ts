@@ -15,15 +15,16 @@ export class AvatarPredictions {
     })
 
     this.predictor = new AUPredictor({
-      apiToken: process.env.REACT_APP_AVATAR_WEBKIT_AUTH_TOKEN!,
-      srcVideoStream: this.videoStream
+      apiToken: process.env.REACT_APP_AVATAR_WEBKIT_AUTH_TOKEN!
     })
 
     this.predictor.onPredict = ((results: AvatarPrediction) => {
       console.log(results)
     })
 
-    return this.predictor.start()
+    return this.predictor.start({
+      stream: this.videoStream
+    })
   }
 
   async stop() {

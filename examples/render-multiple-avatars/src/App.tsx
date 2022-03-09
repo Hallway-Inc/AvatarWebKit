@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import EmojiWidget from './avatar/emoji/emojiWidget';
+import AvatarsLayout from './avatar/avatarsLayout';
 
 class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <EmojiWidget />
+        <AvatarsLayout />
       </div>
     )
   }
