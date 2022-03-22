@@ -104,37 +104,12 @@ export class AvatarWorld implements Updateable, Renderable {
     this.controls.tick(delta)
   }
 
-  containerIsOffscreen(screenWidth: number, screenHeight: number): boolean {
-    const { left, right, top, bottom } = this.container.getBoundingClientRect()
-
-    return bottom < 0 ||      // above
-      top > screenHeight ||   // below
-      right < 0 ||            // left
-      left > screenWidth      // right
+  getContainerRect(): DOMRect {
+    return this.container.getBoundingClientRect()
   }
 
   render(renderer: WebGLRenderer): void {
-
-    const rendererWidth = renderer.domElement.clientWidth
-    const rendererHeight = renderer.domElement.clientHeight
-
-    if (this.containerIsOffscreen(rendererWidth, rendererHeight)) {
-      return
-    }
-
-    renderer.setScissorTest(true)
-
-    const { width, height, left, bottom } = this.container.getBoundingClientRect()
-
-    const xPos = left
-    const yPos = rendererHeight - bottom
-
-    renderer.setViewport(xPos, yPos, width, height)
-    renderer.setScissor(xPos, yPos, width, height)
-
     renderer.render(this.scene, this.camera)
-
-    renderer.setScissorTest(false)
   }
 
   updateFromResults(results: AvatarPrediction) {

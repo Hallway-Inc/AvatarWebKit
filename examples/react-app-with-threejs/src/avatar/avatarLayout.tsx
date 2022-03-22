@@ -11,7 +11,6 @@ import { EnvironmentLoader } from './world/systems/environmentLoader'
 import { AvatarWorld } from './world/world'
 
 import styles from './avatarLayout.module.scss'
-import { createGlobalCanvas } from './world/globalCanvas'
 import { modelFactory } from './world/models'
 
 const CAMERA_WIDTH = 640
@@ -39,7 +38,7 @@ class AvatarLayout extends React.Component<Props, State> {
 
   private node: HTMLDivElement
   private videoRef = React.createRef<HTMLVideoElement>()
-  private avatarContainerRef = React.createRef<HTMLDivElement>()
+  private avatarCanvas = React.createRef<HTMLCanvasElement>()
 
   state: State = {
     flipped: true,
@@ -92,16 +91,14 @@ class AvatarLayout extends React.Component<Props, State> {
   async _initWorlds() {
     if (this.world) return
 
-    let avatarContainer = this.avatarContainerRef.current
-    if (!avatarContainer) return
+    let avatarCanvas = this.avatarCanvas.current
+    if (!avatarCanvas) return
 
-    const canvas = createGlobalCanvas()
-
-    this.renderLoop = new RenderLoop({ canvas })
+    this.renderLoop = new RenderLoop({ canvas: avatarCanvas })
     this.environmentLoader = new EnvironmentLoader(this.renderLoop.webGLRenderer)
 
     this.world = new AvatarWorld({
-      container: avatarContainer,
+      container: avatarCanvas,
       environmentLoader: this.environmentLoader
     })
   
@@ -200,8 +197,8 @@ class AvatarLayout extends React.Component<Props, State> {
       >
         <div className={styles.container}>
           <div className={styles.videoContainer}>
-            <div
-              ref={this.avatarContainerRef}
+            <canvas
+              ref={this.avatarCanvas}
               style={{ width: AVATAR_WIDTH, height: AVATAR_HEIGHT }}
             />
             <video

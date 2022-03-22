@@ -10,6 +10,7 @@ export interface Updateable {
 
 export interface Renderable {
   render(renderer: WebGLRenderer): void
+  getContainerRect(): DOMRect
 }
 
 export class RenderLoop {
@@ -52,9 +53,47 @@ export class RenderLoop {
 
       // Draw things
       for (const renderable of this.renderables) {
-        renderable.render(this.webGLRenderer)
+        this._withScissoredViewport(renderable, () => {
+          renderable.render(this.webGLRenderer)
+        })
       }
     })
+  }
+
+  private _isRenderableOffscreen(renderable: Renderable): boolean {
+    const { top, left, bottom, right } = renderable.getContainerRect()
+  
+    return bottom < 0 ||                  // above
+      top > this.canvas.clientHeight ||   // below
+      right < 0 ||                        // left
+      left > this.canvas.clientWidth      // right
+  }
+
+  private _withScissoredViewport(renderable: Renderable, render: () => void) {
+    if (!isGlobalCanvas(this.canvas)) {
+      render()
+      return
+    }
+
+    // For global canvas, we do some optimization to skip item drawing when offscreen
+    if (this._isRenderableOffscreen(renderable)) {
+      return
+    }
+
+    // For global canvas, we use scissoring technique to draw scenes to different locations on the canvas
+    this.webGLRenderer.setScissorTest(true)
+
+    const { width, height, left, bottom } = renderable.getContainerRect()
+    
+    const xPos = left
+    const yPos = this.canvas.clientHeight - bottom
+
+    this.webGLRenderer.setViewport(xPos, yPos, width, height)
+    this.webGLRenderer.setScissor(xPos, yPos, width, height)
+
+    render()
+
+    this.webGLRenderer.setScissorTest(false)
   }
 
   stop() {
