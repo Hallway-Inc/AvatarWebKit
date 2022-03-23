@@ -47,7 +47,6 @@ export class RenderLoop {
       }
 
       // Clear canvas
-      this.webGLRenderer.setClearColor(0xffffff)
       this.webGLRenderer.clear()
 
       // Draw things

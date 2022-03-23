@@ -8,7 +8,7 @@
  */
 export const tileGlobalCanvasId = 'hallway-tile-global-canvas'
 
-export const createGlobalCanvas = (zIndex: number = -1, prependToBody: boolean = true): HTMLCanvasElement => {
+export const createGlobalCanvas = (zIndex: number = 0, prependToBody: boolean = true): HTMLCanvasElement => {
   const oldCanvas = document.getElementById(tileGlobalCanvasId)
   if (oldCanvas) {
     oldCanvas.remove()
