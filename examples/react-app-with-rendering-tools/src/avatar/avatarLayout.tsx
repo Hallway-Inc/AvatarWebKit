@@ -2,17 +2,13 @@ import React from 'react'
 
 // eslint-disable-next-line
 import { AUPredictor, AvatarPrediction } from '@quarkworks-inc/avatar-webkit'
+import { AvatarWorld, EnvironmentLoader, RenderLoop, modelFactory } from '@quarkworks-inc/avatar-webkit-rendering'
 
 import { Loader } from './components/loader'
 import { Switch } from './components/switch'
 import { MenuSelect } from './components/menuSelect'
-import { RenderLoop } from './world/renderLoop'
-import { EnvironmentLoader } from './world/systems/environmentLoader'
-import { AvatarWorld } from './world/world'
 
 import styles from './avatarLayout.module.scss'
-import { modelFactory } from './world/models'
-
 const CAMERA_WIDTH = 640
 const CAMERA_HEIGHT = 360
 
