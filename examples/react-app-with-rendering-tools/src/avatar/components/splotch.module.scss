@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  width: 120px;
+  height: auto;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.splotch {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  margin: 20px;
+  border-radius: 40px;
+  transition: 0.05s ease-in;
+  
+  &:hover {
+    filter: brightness(0.95);
+    cursor: pointer;
+  }
+}
+
+.label {
+  font-size: 18px;
+  font-weight: 300;
+  text-align: center;
+  // margin-top: 6px;
+}

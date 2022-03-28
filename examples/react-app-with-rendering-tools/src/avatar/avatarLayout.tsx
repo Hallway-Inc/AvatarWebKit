@@ -233,9 +233,14 @@ class AvatarLayout extends React.Component<Props, State> {
               <Loader width={80} height={80} subtext={'Loading...'} position={'relative'} />
             </div>
           )}
-        </div>
 
-        <Splotch id={"emoji_Face Color"} label="Face Color" color={this.state.emojiColor} onChangeComplete={color => this.setState({ emojiColor: color })}/>
+          <Splotch
+            id="emoji_Face Color" 
+            label="Face Color" 
+            color={this.state.emojiColor} 
+            onChangeComplete={color => this.setState({ emojiColor: color })}
+          />
+        </div>
       </div>
     )
   }
