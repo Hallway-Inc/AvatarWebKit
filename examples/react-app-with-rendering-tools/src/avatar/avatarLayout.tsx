@@ -2,8 +2,8 @@ import React from 'react'
 
 // eslint-disable-next-line
 import { AUPredictor, AvatarPrediction } from '@quarkworks-inc/avatar-webkit'
-import { AvatarWorld, EnvironmentLoader, RenderLoop, modelFactory } from '@quarkworks-inc/avatar-webkit-rendering'
-import { Color, SketchPicker } from 'react-color'
+import { AvatarWorld, EnvironmentLoader, RenderLoop, modelFactory, Model, emojiColors } from '@quarkworks-inc/avatar-webkit-rendering'
+import { Color } from 'react-color'
 
 import { Loader } from './components/loader'
 import { Switch } from './components/switch'
@@ -31,6 +31,7 @@ type State = {
 class AvatarLayout extends React.Component<Props, State> {
   private renderLoop: RenderLoop
   private environmentLoader: EnvironmentLoader
+  private model?: Model
   private world?: AvatarWorld
 
   private predictor!: AUPredictor
@@ -43,7 +44,7 @@ class AvatarLayout extends React.Component<Props, State> {
     flipped: true,
     avatarState: 'loading',
     videoInDevices: [],
-    emojiColor: '#00ff00'
+    emojiColor: '#ff0000'
   }
 
   async componentDidMount() {
@@ -102,8 +103,14 @@ class AvatarLayout extends React.Component<Props, State> {
       environmentLoader: this.environmentLoader
     })
   
-    const model = await modelFactory('emoji')
-    await this.world.loadScene(model)
+    this.model = await modelFactory('emoji')
+
+    this.model.settings = {
+      faceColor: this.state.emojiColor,
+      eyeColor: 0x000000
+    }
+
+    await this.world.loadScene(this.model)
 
     this.renderLoop.updatables.push(this.world)
     this.renderLoop.renderables.push(this.world)
@@ -183,6 +190,17 @@ class AvatarLayout extends React.Component<Props, State> {
     })
   }
 
+  onEmojiColorChanged(color: Color) {
+    this.setState({ emojiColor: color })
+
+    if (this.model) {
+      this.model.settings = {
+        faceColor: color,
+        eyeColor: 0x000000
+      }
+    }
+  }
+
   render() {
     const { avatarState, videoInDevices } = this.state
 
@@ -238,7 +256,7 @@ class AvatarLayout extends React.Component<Props, State> {
             id="emoji_Face Color" 
             label="Face Color" 
             color={this.state.emojiColor} 
-            onChangeComplete={color => this.setState({ emojiColor: color })}
+            onChangeComplete={color => this.onEmojiColorChanged(color.hex)}
           />
         </div>
       </div>

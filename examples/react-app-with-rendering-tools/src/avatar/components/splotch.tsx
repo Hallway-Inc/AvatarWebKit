@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react'
-import { Color, SketchPicker } from 'react-color'
+import { Color, ColorResult, SketchPicker } from 'react-color'
 import ReactTooltip from 'react-tooltip'
+import classnames from 'classnames'
 
 import styles from './splotch.module.scss'
 
@@ -10,7 +11,7 @@ type Props = {
   color: Color
   className?: string
   style?: CSSProperties
-  onChangeComplete: (Color) => void
+  onChangeComplete: (color: ColorResult) => void
 }
 
 type State = {
@@ -32,7 +33,7 @@ export class Splotch extends React.PureComponent<Props, State> {
 
   render() {
     return (
-      <div className={styles.container}>
+      <div className={classnames(styles.container, this.props.className)} style={this.props.style}>
         <div 
           className={styles.splotch} 
           data-tip
@@ -42,7 +43,7 @@ export class Splotch extends React.PureComponent<Props, State> {
             backgroundColor: this.state.color.toString()
           }
         }/>
-        
+
         <label className={styles.label}>{this.props.label}</label>
 
         <ReactTooltip id={this.tooltipId} effect='solid' type='light' clickable={true}>
