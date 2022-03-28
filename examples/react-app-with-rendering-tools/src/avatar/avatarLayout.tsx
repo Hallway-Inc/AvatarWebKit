@@ -3,12 +3,14 @@ import React from 'react'
 // eslint-disable-next-line
 import { AUPredictor, AvatarPrediction } from '@quarkworks-inc/avatar-webkit'
 import { AvatarWorld, EnvironmentLoader, RenderLoop, modelFactory } from '@quarkworks-inc/avatar-webkit-rendering'
+import { SketchPicker } from 'react-color'
 
 import { Loader } from './components/loader'
 import { Switch } from './components/switch'
 import { MenuSelect } from './components/menuSelect'
 
 import styles from './avatarLayout.module.scss'
+import { Splotch } from './components/splotch'
 const CAMERA_WIDTH = 640
 const CAMERA_HEIGHT = 360
 
@@ -230,6 +232,8 @@ class AvatarLayout extends React.Component<Props, State> {
             </div>
           )}
         </div>
+
+        <Splotch label="Face Color" color={0x00ff00} />
       </div>
     )
   }
