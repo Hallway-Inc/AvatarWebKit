@@ -3,7 +3,7 @@ import React from 'react'
 // eslint-disable-next-line
 import { AUPredictor, AvatarPrediction } from '@quarkworks-inc/avatar-webkit'
 import { AvatarWorld, EnvironmentLoader, RenderLoop, modelFactory } from '@quarkworks-inc/avatar-webkit-rendering'
-import { SketchPicker } from 'react-color'
+import { Color, SketchPicker } from 'react-color'
 
 import { Loader } from './components/loader'
 import { Switch } from './components/switch'
@@ -25,6 +25,7 @@ type State = {
   avatarState: ComponentState
   videoInDevices: MediaDeviceInfo[]
   selectedVideoInDeviceId?: string
+  emojiColor: Color
 }
 
 class AvatarLayout extends React.Component<Props, State> {
@@ -41,7 +42,8 @@ class AvatarLayout extends React.Component<Props, State> {
   state: State = {
     flipped: true,
     avatarState: 'loading',
-    videoInDevices: []
+    videoInDevices: [],
+    emojiColor: '#00ff00'
   }
 
   async componentDidMount() {
@@ -233,7 +235,7 @@ class AvatarLayout extends React.Component<Props, State> {
           )}
         </div>
 
-        <Splotch label="Face Color" color={0x00ff00} />
+        <Splotch id={"emoji_Face Color"} label="Face Color" color={this.state.emojiColor} onChangeComplete={color => this.setState({ emojiColor: color })}/>
       </div>
     )
   }
