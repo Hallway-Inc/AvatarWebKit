@@ -2,7 +2,7 @@ import React from 'react'
 
 // eslint-disable-next-line
 import { AUPredictor, AvatarPrediction } from '@quarkworks-inc/avatar-webkit'
-import { AvatarWorld, EnvironmentLoader, RenderLoop, modelFactory, Model, emojiColors } from '@quarkworks-inc/avatar-webkit-rendering'
+import { AvatarWorld, EnvironmentLoader, RenderLoop, modelFactory, Model } from '@quarkworks-inc/avatar-webkit-rendering'
 import { Color } from 'react-color'
 
 import { Loader } from './components/loader'
