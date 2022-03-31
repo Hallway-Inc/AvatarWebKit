@@ -20,7 +20,7 @@ export class CharacterButton extends React.PureComponent<Props> {
     return <>
       <Whisper
         trigger="click"
-        placement="top"
+        placement="bottom"
         controlId={tooltipId}
         speaker={popover}
       >
