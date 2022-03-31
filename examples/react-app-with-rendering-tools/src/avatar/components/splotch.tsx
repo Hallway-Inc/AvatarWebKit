@@ -1,9 +1,9 @@
 import React, { CSSProperties } from 'react'
 import { Color, ColorResult, SketchPicker } from 'react-color'
-import ReactTooltip from 'react-tooltip'
 import classnames from 'classnames'
 
 import styles from './splotch.module.scss'
+import { Popover, Whisper } from 'rsuite'
 
 type Props = {
   id: string
@@ -32,27 +32,34 @@ export class Splotch extends React.PureComponent<Props, State> {
   }
 
   render() {
-    return (
-      <div className={classnames(styles.container, this.props.className)} style={this.props.style}>
-        <div 
-          className={styles.splotch} 
-          data-tip
-          data-for={this.tooltipId} 
-          data-event='click' 
-          style={{
-            backgroundColor: this.state.color.toString()
-          }
-        }/>
-
-        <label className={styles.label}>{this.props.label}</label>
-
-        <ReactTooltip id={this.tooltipId} effect='solid' type='light' clickable={true}>
-          <SketchPicker
+    const popover = (
+      <Popover>
+        <SketchPicker
             color={this.state.color}
             onChange={color => this.setState({ color: color.hex })}
             onChangeComplete={this.props.onChangeComplete}
           />
-        </ReactTooltip>
+      </Popover>
+    )
+
+    return (
+      <div className={classnames(styles.container, this.props.className)} style={this.props.style}>
+
+        <Whisper
+          controlId={this.tooltipId}
+          trigger="click"
+          placement="top"
+          speaker={popover}
+        >
+          <div 
+            className={styles.splotch}
+            style={{
+              backgroundColor: this.state.color.toString()
+            }
+          }/>
+        </Whisper>
+
+        <label className={styles.label}>{this.props.label}</label>
       </div>
     )
   }

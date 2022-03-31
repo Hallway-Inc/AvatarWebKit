@@ -2,15 +2,16 @@ import React from 'react'
 
 // eslint-disable-next-line
 import { AUPredictor, AvatarPrediction } from '@quarkworks-inc/avatar-webkit'
-import { AvatarWorld, EnvironmentLoader, RenderLoop, modelFactory, Model } from '@quarkworks-inc/avatar-webkit-rendering'
-import { Color } from 'react-color'
+import { AvatarWorld, EnvironmentLoader, RenderLoop, modelFactory, Model, ModelSettings, hallwayPublicCDNUrl } from '@quarkworks-inc/avatar-webkit-rendering'
 
 import { Loader } from './components/loader'
 import { Switch } from './components/switch'
 import { MenuSelect } from './components/menuSelect'
 
 import styles from './avatarLayout.module.scss'
-import { Splotch } from './components/splotch'
+import { CharacterButton } from './components/characterButton'
+import { AvatarOptions } from './AvatarOptions'
+import { CustomizationButton } from './components/customizationButton'
 const CAMERA_WIDTH = 640
 const CAMERA_HEIGHT = 360
 
@@ -25,7 +26,8 @@ type State = {
   avatarState: ComponentState
   videoInDevices: MediaDeviceInfo[]
   selectedVideoInDeviceId?: string
-  emojiColor: Color
+  avatar: AvatarOptions
+  settingsByAvatarId: Record<string, ModelSettings<any>>
 }
 
 class AvatarLayout extends React.Component<Props, State> {
@@ -44,7 +46,8 @@ class AvatarLayout extends React.Component<Props, State> {
     flipped: true,
     avatarState: 'loading',
     videoInDevices: [],
-    emojiColor: '#ff0000'
+    avatar: AvatarOptions.emoji,
+    settingsByAvatarId: {}
   }
 
   async componentDidMount() {
@@ -61,8 +64,14 @@ class AvatarLayout extends React.Component<Props, State> {
     this.start()
   }
 
+  componentDidUpdate(_prevProps: Readonly<Props>, prevState: Readonly<State>): void {
+    if (prevState.avatar.id !== this.state.avatar.id) {
+      this._loadModel()
+    }
+  }
+
   componentWillUnmount(): void {
-      this.stop()
+    this.stop()
   }
 
   async start() {
@@ -102,20 +111,37 @@ class AvatarLayout extends React.Component<Props, State> {
       container: avatarCanvas,
       environmentLoader: this.environmentLoader
     })
-  
-    this.model = await modelFactory('emoji')
-
-    this.model.settings = {
-      faceColor: this.state.emojiColor,
-      eyeColor: 0x000000
-    }
-
-    await this.world.loadScene(this.model)
+    
+    await this._loadModel()
+    await this._loadEnvironment()
 
     this.renderLoop.updatables.push(this.world)
     this.renderLoop.renderables.push(this.world)
 
     this.renderLoop.start()
+  }
+
+  async _loadModel() {
+    const { avatar, settingsByAvatarId } = this.state
+
+    this.model = await modelFactory(avatar.modelType, avatar.modelUrl)
+
+    if (settingsByAvatarId[avatar.id]) {
+      // Set model settings if we have something stored
+      this.model.settings = settingsByAvatarId[avatar.id]
+    } else {
+      // Else, fill state with default settings from model
+      // Probably need an easier way to get default settings for any model, currently requires
+      // creating the Model class itself.
+      settingsByAvatarId[avatar.id] = this.model.settings
+    }
+
+    await this.world.setModel(this.model)
+  }
+
+  async _loadEnvironment() {
+    const envUrl = hallwayPublicCDNUrl('backgrounds/venice_sunset_1k.hdr')
+    await this.world?.setEnvironment(envUrl)
   }
 
   private async _startAvatar() {
@@ -190,19 +216,19 @@ class AvatarLayout extends React.Component<Props, State> {
     })
   }
 
-  onEmojiColorChanged(color: Color) {
-    this.setState({ emojiColor: color })
+  onSettingsDidUpdate(settings: ModelSettings<any>) {
+    const { avatar, settingsByAvatarId } = this.state
 
     if (this.model) {
-      this.model.settings = {
-        faceColor: color,
-        eyeColor: 0x000000
-      }
+      this.model.settings = settings
     }
+
+    settingsByAvatarId[avatar.id] = settings
+    this.setState({ settingsByAvatarId })
   }
 
   render() {
-    const { avatarState, videoInDevices } = this.state
+    const { avatarState, videoInDevices, avatar, settingsByAvatarId } = this.state
 
     return (
       <div
@@ -252,12 +278,16 @@ class AvatarLayout extends React.Component<Props, State> {
             </div>
           )}
 
-          <Splotch
-            id="emoji_Face Color" 
-            label="Face Color" 
-            color={this.state.emojiColor} 
-            onChangeComplete={color => this.onEmojiColorChanged(color.hex)}
-          />
+          <div className={styles.controlsContainer}>
+            <CharacterButton
+              selectedAvatar={avatar}
+              onAvatarSelected={avatar => this.setState({ avatar })}
+            />
+            <CustomizationButton
+              settings={settingsByAvatarId[avatar.id] ?? {}}
+              onSettingsDidUpdate={(settings => this.onSettingsDidUpdate(settings))}
+            />
+          </div>
         </div>
       </div>
     )

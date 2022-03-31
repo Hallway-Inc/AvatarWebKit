@@ -17,6 +17,14 @@
   width: 100%;
 }
 
+.controlsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-items: center;
+}
+
 .videoContainer {
   width: 1280px;
   height: 720px;
