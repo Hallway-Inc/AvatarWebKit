@@ -30,7 +30,7 @@ type State = {
   videoInDevices: MediaDeviceInfo[]
   selectedVideoInDeviceId?: string
   avatar: AvatarOptions
-  settingsByAvatarId: Record<string, ModelSettings<any>>
+  settingsByAvatarId: Record<string, ModelSettings>
   background: BackgroundOptions
 }
 
@@ -221,7 +221,7 @@ class AvatarLayout extends React.Component<Props, State> {
     })
   }
 
-  onSettingsDidUpdate(settings: ModelSettings<any>) {
+  onSettingsDidUpdate(settings: ModelSettings) {
     const { avatar, settingsByAvatarId } = this.state
 
     if (this.model) {

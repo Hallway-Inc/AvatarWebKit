@@ -11,8 +11,8 @@ import { CustomizationPopover } from './popovers/customizationPopover'
 const tooltipId = 'CustomizationButton__tooltip'
 
 type Props = {
-  settings: ModelSettings<any>
-  onSettingsDidUpdate: (settings: ModelSettings<any>) => void
+  settings: ModelSettings
+  onSettingsDidUpdate: (settings: ModelSettings) => void
 }
 
 type State = {
