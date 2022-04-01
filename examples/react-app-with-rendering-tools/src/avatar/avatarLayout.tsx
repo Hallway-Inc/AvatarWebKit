@@ -2,16 +2,19 @@ import React from 'react'
 
 // eslint-disable-next-line
 import { AUPredictor, AvatarPrediction } from '@quarkworks-inc/avatar-webkit'
-import { AvatarWorld, EnvironmentLoader, RenderLoop, modelFactory, Model, ModelSettings, hallwayPublicCDNUrl } from '@quarkworks-inc/avatar-webkit-rendering'
+import { AvatarWorld, modelFactory, Model, ModelSettings, AvatarRenderer } from '@quarkworks-inc/avatar-webkit-rendering'
 
-import { Loader } from './components/loader'
-import { Switch } from './components/switch'
-import { MenuSelect } from './components/menuSelect'
+import { Loader } from '../components/shared/loader'
+import { Switch } from '../components/shared/switch'
+import { MenuSelect } from '../components/shared/menuSelect'
+import { CharacterButton } from '../components/controls/characterButton'
+import { AvatarOptions } from './AvatarOptions'
+import { CustomizationButton } from '../components/controls/customizationButton'
 
 import styles from './avatarLayout.module.scss'
-import { CharacterButton } from './components/characterButton'
-import { AvatarOptions } from './AvatarOptions'
-import { CustomizationButton } from './components/customizationButton'
+import { BackgroundOptions } from './BackgroundOptions'
+import { BackgroundButton } from '../components/controls/backgroundButton'
+
 const CAMERA_WIDTH = 640
 const CAMERA_HEIGHT = 360
 
@@ -28,11 +31,11 @@ type State = {
   selectedVideoInDeviceId?: string
   avatar: AvatarOptions
   settingsByAvatarId: Record<string, ModelSettings<any>>
+  background: BackgroundOptions
 }
 
 class AvatarLayout extends React.Component<Props, State> {
-  private renderLoop: RenderLoop
-  private environmentLoader: EnvironmentLoader
+  private avatarRenderer: AvatarRenderer
   private model?: Model
   private world?: AvatarWorld
 
@@ -47,7 +50,8 @@ class AvatarLayout extends React.Component<Props, State> {
     avatarState: 'loading',
     videoInDevices: [],
     avatar: AvatarOptions.emoji,
-    settingsByAvatarId: {}
+    settingsByAvatarId: {},
+    background: BackgroundOptions.all[0]
   }
 
   async componentDidMount() {
@@ -67,6 +71,9 @@ class AvatarLayout extends React.Component<Props, State> {
   componentDidUpdate(_prevProps: Readonly<Props>, prevState: Readonly<State>): void {
     if (prevState.avatar.id !== this.state.avatar.id) {
       this._loadModel()
+    }
+    if (prevState.background.id !== this.state.background.id) {
+      this._loadEnvironment()
     }
   }
 
@@ -92,8 +99,8 @@ class AvatarLayout extends React.Component<Props, State> {
   }
 
   async stop() {
-    this.renderLoop.stop()
-    this.renderLoop.canvas.remove()
+    this.avatarRenderer.stop()
+    this.avatarRenderer.canvas.remove()
     this.predictor.stop()
     this.world = undefined
   }
@@ -104,21 +111,20 @@ class AvatarLayout extends React.Component<Props, State> {
     let avatarCanvas = this.avatarCanvas.current
     if (!avatarCanvas) return
 
-    this.renderLoop = new RenderLoop({ canvas: avatarCanvas })
-    this.environmentLoader = new EnvironmentLoader(this.renderLoop.webGLRenderer)
+    this.avatarRenderer = new AvatarRenderer({ canvas: avatarCanvas })
 
     this.world = new AvatarWorld({
       container: avatarCanvas,
-      environmentLoader: this.environmentLoader
+      renderer: this.avatarRenderer
     })
     
     await this._loadModel()
     await this._loadEnvironment()
 
-    this.renderLoop.updatables.push(this.world)
-    this.renderLoop.renderables.push(this.world)
+    this.avatarRenderer.updatables.push(this.world)
+    this.avatarRenderer.renderables.push(this.world)
 
-    this.renderLoop.start()
+    this.avatarRenderer.start()
   }
 
   async _loadModel() {
@@ -140,8 +146,7 @@ class AvatarLayout extends React.Component<Props, State> {
   }
 
   async _loadEnvironment() {
-    const envUrl = hallwayPublicCDNUrl('backgrounds/venice_sunset_1k.hdr')
-    await this.world?.setEnvironment(envUrl)
+    await this.world?.setEnvironment(this.state.background.url)
   }
 
   private async _startAvatar() {
@@ -228,7 +233,7 @@ class AvatarLayout extends React.Component<Props, State> {
   }
 
   render() {
-    const { avatarState, videoInDevices, avatar, settingsByAvatarId } = this.state
+    const { avatarState, videoInDevices, avatar, settingsByAvatarId, background } = this.state
 
     return (
       <div
@@ -286,6 +291,10 @@ class AvatarLayout extends React.Component<Props, State> {
             <CustomizationButton
               settings={settingsByAvatarId[avatar.id] ?? {}}
               onSettingsDidUpdate={(settings => this.onSettingsDidUpdate(settings))}
+            />
+            <BackgroundButton
+              selectedBackground={background}
+              onBackgroundSelected={background => this.setState({ background })}
             />
           </div>
         </div>

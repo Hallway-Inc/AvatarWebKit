@@ -1416,10 +1416,10 @@
     schema-utils "^3.0.0"
     source-map "^0.7.3"
 
-"@quarkworks-inc/avatar-webkit-rendering@0.4.3":
-  version "0.4.3"
-  resolved "https://gitlab.com/api/v4/projects/34748229/packages/npm/@quarkworks-inc/avatar-webkit-rendering/-/@quarkworks-inc/avatar-webkit-rendering-0.4.3.tgz#c186dbf9faea6b9251609f33a31997ac7854ca26"
-  integrity sha1-wYbb+frqa5JRYJ8zoxmXrHhUyiY=
+"@quarkworks-inc/avatar-webkit-rendering@0.5.0":
+  version "0.5.0"
+  resolved "https://gitlab.com/api/v4/projects/34748229/packages/npm/@quarkworks-inc/avatar-webkit-rendering/-/@quarkworks-inc/avatar-webkit-rendering-0.5.0.tgz#7042427f741b9311bc32d42d5a21107f0d7fc0b6"
+  integrity sha1-cEJCf3QbkxG8MtQtWiEQfw1/wLY=
   dependencies:
     "@quarkworks-inc/avatar-webkit" "^0.3.0"
     three "^0.138.3"

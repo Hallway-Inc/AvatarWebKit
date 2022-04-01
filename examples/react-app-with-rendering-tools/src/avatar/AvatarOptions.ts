@@ -1,9 +1,9 @@
 import { hallwayPublicCDNUrl, ModelType } from "@quarkworks-inc/avatar-webkit-rendering"
 
-import emojiIcon from '../assets/emoji.png'
-import mozillaIcon from '../assets/mozilla.png'
-import hannahIcon from '../assets/hannah.png'
-import kevinIcon from '../assets/kevin.png'
+import emojiIcon from '../assets/avatar_thumbs/emoji.png'
+import mozillaIcon from '../assets/avatar_thumbs/mozilla.png'
+import hannahIcon from '../assets/avatar_thumbs/hannah.png'
+import kevinIcon from '../assets/avatar_thumbs/kevin.png'
 
 export class AvatarOptions {
   readonly id: string

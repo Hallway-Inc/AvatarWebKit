@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import React from 'react'
 import { Popover } from 'rsuite'
-import { AvatarOptions } from '../AvatarOptions'
+import { AvatarOptions } from '../../../avatar/AvatarOptions'
 
 import styles from './characterPopover.module.scss'
 

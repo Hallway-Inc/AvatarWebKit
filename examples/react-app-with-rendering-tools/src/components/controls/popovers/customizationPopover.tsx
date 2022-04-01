@@ -1,11 +1,12 @@
 import classnames from 'classnames'
 import React from 'react'
 import { Popover } from 'rsuite'
-import { Splotch } from './splotch'
-
-import styles from './characterPopover.module.scss'
 import { ModelSettings } from '@quarkworks-inc/avatar-webkit-rendering'
 import { ColorResult } from 'react-color'
+
+import { Splotch } from '../../shared/splotch'
+
+import styles from './characterPopover.module.scss'
 
 type Props = {
   settings: ModelSettings<any>

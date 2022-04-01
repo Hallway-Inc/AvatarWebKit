@@ -3,8 +3,8 @@ import { Whisper } from 'rsuite'
 
 import styles from './characterButton.module.scss'
 
-import { CharacterPopover } from './characterPopover'
-import { AvatarOptions } from '../AvatarOptions'
+import { CharacterPopover } from './popovers/characterPopover'
+import { AvatarOptions } from '../../avatar/AvatarOptions'
 
 const tooltipId = 'CharacterButton__tooltip'
 

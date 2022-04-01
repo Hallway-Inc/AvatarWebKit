@@ -5,8 +5,8 @@ import { ModelSettings } from '@quarkworks-inc/avatar-webkit-rendering'
 
 import styles from './customizationButton.module.scss'
 
-import { ReactComponent as ArtSvg } from '../../assets/art.svg'
-import { CustomizationPopover } from './customizationPopover'
+import { ReactComponent as ArtSvg } from '../../assets/icons/art.svg'
+import { CustomizationPopover } from './popovers/customizationPopover'
 
 const tooltipId = 'CustomizationButton__tooltip'
 
