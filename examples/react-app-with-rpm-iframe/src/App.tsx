@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 
 function App() {
-  const subdomain = 'hallway'; // Replace with your custom subdomain
+  const subdomain = 'hallway'
   const iFrameRef = useRef<HTMLIFrameElement>(null)
   const [avatarUrl, setAvatarUrl] = useState<string>('')
   const [showIFrame, setShowIFrame] = useState<boolean>(false)
@@ -31,11 +31,11 @@ function App() {
       return;
     }
 
-    // Susbribe to all events sent from Ready Player Me once frame is ready
+    // Subscribe to all events sent from Ready Player Me once frame is ready
     if (json.eventName === 'v1.frame.ready') {
       let iFrame = iFrameRef.current
-      if(iFrame) {
-        iFrame.contentWindow!.postMessage(
+      if(iFrame && iFrame.contentWindow) {
+        iFrame.contentWindow.postMessage(
           JSON.stringify({
             target: 'readyplayerme',
             type: 'subscribe',
@@ -67,16 +67,12 @@ function App() {
     }
   }
 
-  function toggleIframe() {
-    setShowIFrame(!showIFrame);
-  }
-  
   return (
     <div className="App">
       <div className="topBar">
         <input
           className="toggleButton"
-          onClick={() => toggleIframe()} 
+          onClick={() => setShowIFrame(!showIFrame)} 
           type="button"
           value={`${showIFrame ? 'Close': 'Open'} creator`}
         />
