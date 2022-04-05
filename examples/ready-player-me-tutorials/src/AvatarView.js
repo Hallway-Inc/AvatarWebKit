@@ -3,12 +3,17 @@ import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js"
+import { AUPredictor } from '@quarkworks-inc/avatar-webkit'
 
 const navigationBarHeight = 100
 const backgroundUrl = "https://hallway-public.nyc3.cdn.digitaloceanspaces.com/backgrounds/venice_sunset_1k.hdr"
 
 export class AvatarView extends React.Component {
     mainViewRef = React.createRef()
+    predictor = new AUPredictor({
+        apiToken: '110546ae-627f-48d4-9cf8-fd8850e0ac7f',
+        shouldMirrorOutput: true
+    })
 
     async componentDidMount() {
         const mainView = this.mainViewRef.current
@@ -25,20 +30,48 @@ export class AvatarView extends React.Component {
   
         this.controls = new OrbitControls(this.camera, this.renderer.domElement)
 
-        this.loadModel()
-
         // We will use the lighting from the background instead of creating our own
         const background = await this.loadBackground(backgroundUrl, this.renderer)
         this.scene = new THREE.Scene()
         this.scene.environment = background
         this.scene.background = background
 
+        this.loadModel()
+
         this.renderer.setAnimationLoop(this.renderScene.bind(this))
+
+        this.predictor.onPredict = this.onPredict.bind(this)
+    }
+
+    onPredict = (results) => {
+        const head = this.avatar.children.find((child) => child.name === "Wolf3D_Avatar")
+
+        Object.entries(results.actionUnits).forEach(function([key, value]) {
+            const index = head.morphTargetDictionary[key]
+            head.morphTargetInfluences[index] = value
+        })
     }
     
-    componentDidUpdate(props, oldProps) {
-        if(props?.avatarUrl && props?.avatarUrl !== oldProps?.avatarUrl) {
+    async componentDidUpdate(oldProps) {
+        if(this.props?.avatarUrl && this.props?.avatarUrl !== oldProps?.avatarUrl) {
             this.loadModel()
+        }
+        
+        if(this.props?.predicting !== oldProps?.predicting) {
+            if(this.props?.predicting && this.predictor.state === 'stopped') {
+                let stream = await navigator.mediaDevices.getUserMedia({
+                    audio: false,
+                    video: {
+                        width: { ideal: 640 },
+                        height: { ideal: 360 },
+                        facingMode: 'user'
+                    }
+                })
+
+                await this.predictor.start({stream})
+            } else if(this.predictor.state !== 'stopped') {
+                await this.predictor.stop()
+            }    
         }
 
         this.renderer.domElement.style.cssText = `display: ${!this.props.showIFrame ? 'block': 'none'}`
@@ -46,14 +79,11 @@ export class AvatarView extends React.Component {
 
     async loadModel() {
         const gltf = await this.loadGLTF(this.props.avatarUrl)
-        const avatar = gltf.scene
-        avatar.position.set(0, -0.55, 0)
+        this.avatar = gltf.scene.children[0]
+        this.avatar.position.set(0, -4, 0)
+        this.avatar.scale.setScalar(7.5)
 
-        const group = new THREE.Group()
-        group.add(avatar)
-        group.scale.setScalar(7.5)
-
-        this.scene.add(group)
+        this.scene.add(this.avatar)
     }
 
     renderScene() {

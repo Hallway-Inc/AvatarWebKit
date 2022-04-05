@@ -7,6 +7,7 @@ function App() {
   const iFrameRef = useRef(null)
   const [avatarUrl, setAvatarUrl] = useState('')
   const [showIFrame, setShowIFrame] = useState(true)
+  const [predicting, setPredicting] = useState(false)
 
   useEffect(() => {
     let iFrame = iFrameRef.current
@@ -52,6 +53,7 @@ function App() {
       console.log(`Avatar URL: ${json.data.url}`);
       setAvatarUrl(json.data.url)
       setShowIFrame(false);
+      setPredicting(true)
     }
 
     // Get user id
@@ -77,9 +79,17 @@ function App() {
           type="button"
           value={`${showIFrame ? 'Close': 'Open'} creator`}
         />
+        {avatarUrl && 
+          <input
+            className="toggleButton"
+            onClick={() => setPredicting(!predicting)} 
+            type="button"
+            value={`${predicting ? 'Stop': 'Start'} predicting`}
+          />
+        }
         <p id="avatarUrl">Avatar URL: {avatarUrl}</p>
       </div>
-      {avatarUrl && <AvatarView avatarUrl={avatarUrl} showIFrame={showIFrame}/>}
+      {avatarUrl && <AvatarView avatarUrl={avatarUrl} predicting={predicting} showIFrame={showIFrame} />}
       <iframe
         allow="camera *; microphone *" 
         className="iFrame"
