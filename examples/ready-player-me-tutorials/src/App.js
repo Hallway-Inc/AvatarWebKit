@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
-
+import { AvatarView } from './AvatarView';
 
 function App() {
   const subdomain = 'hallway'
@@ -79,6 +79,7 @@ function App() {
         />
         <p id="avatarUrl">Avatar URL: {avatarUrl}</p>
       </div>
+      {avatarUrl && <AvatarView avatarUrl={avatarUrl} showIFrame={showIFrame}/>}
       <iframe
         allow="camera *; microphone *" 
         className="iFrame"
