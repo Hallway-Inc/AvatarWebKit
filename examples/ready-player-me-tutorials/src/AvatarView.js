@@ -7,6 +7,7 @@ import { AUPredictor } from '@quarkworks-inc/avatar-webkit'
 
 const navigationBarHeight = 100
 const backgroundUrl = "https://hallway-public.nyc3.cdn.digitaloceanspaces.com/backgrounds/venice_sunset_1k.hdr"
+const SCALE = 7.5
 
 export class AvatarView extends React.Component {
     mainViewRef = React.createRef()
@@ -50,6 +51,22 @@ export class AvatarView extends React.Component {
             const index = head.morphTargetDictionary[key]
             head.morphTargetInfluences[index] = value
         })
+
+        const {
+            pitch,
+            yaw,
+            roll,
+        } = results.rotation
+
+        this.avatar?.rotation.set(-pitch, yaw, roll)
+
+        const {
+            x,
+            y,
+            z
+        } = results.transform
+
+        this.avatar.position.set(x * SCALE, -4 + y * SCALE, z)
     }
     
     async componentDidUpdate(oldProps) {
@@ -81,7 +98,7 @@ export class AvatarView extends React.Component {
         const gltf = await this.loadGLTF(this.props.avatarUrl)
         this.avatar = gltf.scene.children[0]
         this.avatar.position.set(0, -4, 0)
-        this.avatar.scale.setScalar(7.5)
+        this.avatar.scale.setScalar(SCALE)
 
         this.scene.add(this.avatar)
     }
