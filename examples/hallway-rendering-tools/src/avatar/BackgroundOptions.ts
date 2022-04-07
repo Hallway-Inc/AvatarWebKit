@@ -17,7 +17,7 @@ export class BackgroundOptions {
   // 1k HDRs
   static readonly venice_sunset_1k = new BackgroundOptions("venice_sunset_1k", "Venice Sunset (1k)", hallwayPublicCDNUrl('backgrounds/venice_sunset_1k.hdr'), '1.3 MB')
   static readonly aerodynamics_workshop_1k = new BackgroundOptions("aerodynamics_workshop_1k", "Aerodynamics Workshop (1k)", hallwayPublicCDNUrl('backgrounds/aerodynamics_workshop_1k.hdr'), '1.4 MB')
-  static readonly missle_launch_facility_1k = new BackgroundOptions("missle_launch_facility_1k", "Missle Launch Facility (1k)", hallwayPublicCDNUrl('backgrounds/missle_launch_facility_1k.hdr'), '1.6 MB')
+  static readonly missle_launch_facility_1k = new BackgroundOptions("missle_launch_facility_1k", "Missle Launch Facility (1k)", hallwayPublicCDNUrl('backgrounds/missile_launch_facility_01_1k.hdr'), '1.6 MB')
 
   // 4k EXRs
   // Sorted by size increasing
