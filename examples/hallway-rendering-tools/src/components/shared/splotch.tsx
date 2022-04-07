@@ -48,7 +48,7 @@ export class Splotch extends React.PureComponent<Props, State> {
         <Whisper
           controlId={this.tooltipId}
           trigger="click"
-          placement="bottom"
+          placement="top"
           speaker={popover}
         >
           <div 

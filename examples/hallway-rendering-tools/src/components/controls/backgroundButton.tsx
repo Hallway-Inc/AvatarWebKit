@@ -20,7 +20,7 @@ export class BackgroundButton extends React.PureComponent<Props> {
     return <>
       <Whisper
         trigger="click"
-        placement="bottom"
+        placement="top"
         controlId={tooltipId}
         speaker={popover}
       >

@@ -72,7 +72,7 @@ export class CustomizationButton extends React.Component<Props, State> {
         trigger="none"
         open={this.state.isPopoverOpen}
         onClick={(e) => this.buttonWasClicked(e)}
-        placement="bottom"
+        placement="top"
         controlId={tooltipId}
         speaker={popover}
       >
