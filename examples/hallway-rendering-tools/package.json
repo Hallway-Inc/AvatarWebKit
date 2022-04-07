@@ -1,10 +1,10 @@
 {
-  "name": "react-app-with-rendering-tools",
+  "name": "hallway-rendering-tools",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@quarkworks-inc/avatar-webkit": "0.3.0",
-    "@quarkworks-inc/avatar-webkit-rendering": "0.6.0",
+    "@quarkworks-inc/avatar-webkit-rendering": "0.7.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
