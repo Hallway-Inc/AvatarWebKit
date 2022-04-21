@@ -3,7 +3,7 @@ import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js"
-import { AUPredictor } from '@quarkworks-inc/avatar-webkit'
+import { AUPredictor, BlendShapeKeys } from '@quarkworks-inc/avatar-webkit'
 
 const navigationBarHeight = 100
 const backgroundUrl = "https://hallway-public.nyc3.cdn.digitaloceanspaces.com/backgrounds/venice_sunset_1k.hdr"
@@ -47,8 +47,10 @@ export class AvatarView extends React.Component {
     onPredict = (results) => {
         const head = this.avatar.children.find((child) => child.name === "Wolf3D_Avatar")
 
-        Object.entries(results.actionUnits).forEach(function([key, value]) {
-            const index = head.morphTargetDictionary[key]
+        Object.entries(results.blendShapes).forEach(function([key, value]) {
+            const arKitKey = BlendShapeKeys.toARKitConvention(key)
+
+            const index = head.morphTargetDictionary[arKitKey]
             head.morphTargetInfluences[index] = value
         })
 

@@ -1,4 +1,4 @@
-import { AvatarPrediction, ActionUnits } from "@quarkworks-inc/avatar-webkit"
+import { AvatarPrediction, BlendShapeKeys, BlendShapes } from "@quarkworks-inc/avatar-webkit"
 import { Group, Object3D, Scene, SkinnedMesh } from "three"
 import { Model, ModelType, object3DChildNamed, setMorphTarget } from "."
 import { loadModel } from "../systems/loadModel"
@@ -54,17 +54,20 @@ export class ReadyPlayerMeModel implements Model {
   updateFromResults(results: AvatarPrediction) {
     if (!this.model) return
 
-    this.updateMorphTargets(results.actionUnits)
+    this.updateBlendShapes(results.blendShapes)
     this.updateHeadRotation(-results.rotation.pitch, -results.rotation.yaw, -results.rotation.roll)
     this.updatePosition(results.transform.x, results.transform.y, results.transform.z)
   }
 
-  private updateMorphTargets(targets: ActionUnits) {
-    for (const key in targets) {
-      const value = targets[key]
-      setMorphTarget(this.faceNode, key, value)
-      setMorphTarget(this.teethNode, key, value)
-      setMorphTarget(this.wolf3D_Avatar, key, value)
+  private updateBlendShapes(blendShapes: BlendShapes) {
+    for (const key in blendShapes) {
+      const value = blendShapes[key]
+
+      const arKitKey = BlendShapeKeys.toARKitConvention(key)
+
+      setMorphTarget(this.faceNode, arKitKey, value)
+      setMorphTarget(this.teethNode, arKitKey, value)
+      setMorphTarget(this.wolf3D_Avatar, arKitKey, value)
     }
   }
 

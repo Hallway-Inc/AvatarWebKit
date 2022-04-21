@@ -1406,10 +1406,10 @@
     schema-utils "^3.0.0"
     source-map "^0.7.3"
 
-"@quarkworks-inc/avatar-webkit@0.2.0":
-  version "0.2.0"
-  resolved "https://gitlab.com/api/v4/projects/33101379/packages/npm/@quarkworks-inc/avatar-webkit/-/@quarkworks-inc/avatar-webkit-0.2.0.tgz#21f512803059dcb79b454cae38c02683ac66908d"
-  integrity sha1-IfUSgDBZ3LebRUyuOMAmg6xmkI0=
+"@quarkworks-inc/avatar-webkit@0.8.0":
+  version "0.8.0"
+  resolved "https://gitlab.com/api/v4/projects/34748229/packages/npm/@quarkworks-inc/avatar-webkit/-/@quarkworks-inc/avatar-webkit-0.8.0.tgz#b6c62c47ff4f4f53c5d4ed9693f38d5d271694e6"
+  integrity sha1-tsYsR/9PT1PF1O2Wk/ONXScWlOY=
   dependencies:
     "@mediapipe/face_mesh" "0.4.1633559619"
     "@tensorflow/tfjs" "3.1.0"

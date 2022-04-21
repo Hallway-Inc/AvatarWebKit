@@ -1,7 +1,7 @@
 import React from 'react'
 
 // eslint-disable-next-line
-import { AUPredictor, AUPredictorConfig, AvatarPrediction } from '@quarkworks-inc/avatar-webkit'
+import { AUPredictor, AvatarPrediction } from '@quarkworks-inc/avatar-webkit'
 
 import { Loader } from './components/loader'
 import { Switch } from './components/switch'

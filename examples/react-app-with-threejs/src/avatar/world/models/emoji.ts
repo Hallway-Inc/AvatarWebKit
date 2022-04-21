@@ -1,7 +1,6 @@
-import { AvatarPrediction, ActionUnits } from "@quarkworks-inc/avatar-webkit";
+import { AvatarPrediction, BlendShapeKeys, BlendShapes } from "@quarkworks-inc/avatar-webkit";
 import { Group, Scene, Mesh, MeshStandardMaterial, MathUtils } from "three";
 import { Model, ModelType } from ".";
-import { emojiKeyMap } from "../../utils/emojiKeyMap";
 import { loadModel } from "../systems/loadModel";
 
 const Y_OFFSET = -0.55
@@ -70,23 +69,22 @@ export class EmojiModel implements Model {
   updateFromResults(results: AvatarPrediction) {
     if (!this.model) return
 
-    this.updateMorphTargets(results.actionUnits)
+    this.updateBlendShapes(results.blendShapes)
     this.updateHeadRotation(-results.rotation.pitch, -results.rotation.yaw, -results.rotation.roll)
     this.updatePosition(results.transform.x, results.transform.y, results.transform.z)
   }
 
-  private updateMorphTargets(targets: ActionUnits) {
+  private updateBlendShapes(blendShapes: BlendShapes) {
     if (!this.face) return
 
-    for (const key in targets) {
-      let value = targets[key]
+    for (const key in blendShapes) {
+      let value = blendShapes[key]
 
-      if (key === 'browDownLeft' || key === 'browDownRight') {
+      if (key === BlendShapeKeys.browDown_L || key === BlendShapeKeys.browDown_R) {
         value = Math.min(Math.max(value - 0.0, 0), 1)
       }
 
-      // Morph index for emoji doesn't quite match up with ARKit keys
-      const morphIndex = this.face.morphTargetDictionary[emojiKeyMap[key]]
+      const morphIndex = this.face.morphTargetDictionary[key]
 
       this.face.morphTargetInfluences[morphIndex] = value
       this.mouth.morphTargetInfluences[morphIndex] = value
@@ -95,13 +93,13 @@ export class EmojiModel implements Model {
     }
 
     const eulerRight = [
-      targets.eyeLookDownLeft + -targets.eyeLookUpLeft,
-      targets.eyeLookOutLeft + -targets.eyeLookInLeft,
+      blendShapes.eyeLookDown_L + -blendShapes.eyeLookUp_L,
+      blendShapes.eyeLookOut_L + -blendShapes.eyeLookIn_L,
       0.0
     ]
     const eulerLeft = [
-      targets.eyeLookDownRight + -targets.eyeLookUpRight,
-      -targets.eyeLookOutRight + targets.eyeLookInRight,
+      blendShapes.eyeLookDown_R + -blendShapes.eyeLookUp_R,
+      -blendShapes.eyeLookOut_R + blendShapes.eyeLookIn_R,
       0.0
     ]
     const maxAngle = (1 / 57.3) * 30

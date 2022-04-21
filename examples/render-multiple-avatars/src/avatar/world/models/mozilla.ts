@@ -1,4 +1,4 @@
-import { AvatarPrediction, ActionUnits } from "@quarkworks-inc/avatar-webkit";
+import { AvatarPrediction, BlendShapes } from "@quarkworks-inc/avatar-webkit";
 import { Group, SkinnedMesh, Scene } from "three";
 import { Model, ModelType, object3DChildNamed, setMorphTarget } from ".";
 import { loadModel } from "../systems/loadModel";
@@ -42,23 +42,20 @@ export class MozillaModel implements Model {
   updateFromResults(results: AvatarPrediction) {
     if (!this.model) return
 
-    this.updateMorphTargets(results.actionUnits)
+    this.updateBlendShapes(results.blendShapes)
     this.updateHeadRotation(-results.rotation.pitch, -results.rotation.yaw, -results.rotation.roll)
     this.updatePosition(results.transform.x, results.transform.y, results.transform.z)
   }
 
-  private updateMorphTargets(targets: ActionUnits) {
+  private updateBlendShapes(blendShapes: BlendShapes) {
     
-    const blink = (targets.eyeBlinkLeft + targets.eyeBlinkRight) / 2
+    const blink = (blendShapes.eyeBlink_L + blendShapes.eyeBlink_R) / 2
     setMorphTarget(this.combinedMesh, 'Blink', blink)
 
-    const eyeRotation = (targets.browDownLeft + targets.browDownRight) / 2
+    const eyeRotation = (blendShapes.browDown_L + blendShapes.browDown_R) / 2
     setMorphTarget(this.combinedMesh, 'Eye Rotation', eyeRotation)
     
-    setMorphTarget(this.combinedMesh, 'MouthFlap', targets.jawOpen)
-
-    // TODO: more morph targets? 
-    // you can inspect the nodes to see what is available.
+    setMorphTarget(this.combinedMesh, 'MouthFlap', blendShapes.jawOpen)
   }
 
   private updateHeadRotation(pitch: number, yaw: number, roll: number) {
