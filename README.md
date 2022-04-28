@@ -71,6 +71,22 @@ Now, give this a try! Once the predictor is started, it will take a little bit f
 - [Multiple Avatars](https://github.com/Hallway-Inc/AvatarWebKit/tree/main/examples/render-multiple-avatars)
 - [With Hallway Rendering Tools](https://github.com/Hallway-Inc/AvatarWebKit/tree/main/examples/hallway-rendering-tools)
 
+# FAQ
+
+### What does the Web SDK do?
+The webSDK gives users real-time blendshapes and animation metadata given a video stream or image.
+
+### API Key? What is that and why do I need it?
+An API key is your unique identifier that will allow you to authenticate when using the SDK.
+
+### I’ve added my API Key to my environment, but it’s not working.
+Make sure there aren’t any hidden characters or that the key doesn’t have any typos. You may also need to restart your terminal / environment for the changes to take effect.
+
+### What browsers are supported?
+We recommend Chromium based browsers for best performance, but all other major browsers are supported.
+
+### What’s the best place to reach out for support?
+We are active daily on our [Discord](https://discord.gg/jYCHaMASz7) and can help with any problems you may have! If discord doesn’t work for you, reach out to [sdk@joinhallway.com](mailto:sdk@joinhallway.com)
 
 # AvatarWebKit Rendering
 
