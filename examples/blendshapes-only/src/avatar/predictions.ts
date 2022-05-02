@@ -1,4 +1,4 @@
-import { AUPredictor, AvatarPrediction } from '@quarkworks-inc/avatar-webkit'
+import { AUPredictor, AvatarCoder, AvatarPrediction } from '@quarkworks-inc/avatar-webkit'
 
 export class AvatarPredictions {
   videoStream?: MediaStream
@@ -20,6 +20,8 @@ export class AvatarPredictions {
 
     this.predictor.onPredict = ((results: AvatarPrediction) => {
       console.log(results)
+      this.test(results)
+      this.predictor?.stop()
     })
 
     return this.predictor.start({
@@ -29,5 +31,29 @@ export class AvatarPredictions {
 
   async stop() {
     return this.predictor?.stop()
+  }
+
+  test(results: AvatarPrediction) {
+    let t0 = performance.now()
+    const encoder = new TextEncoder()
+    const decoder = new TextDecoder();
+
+    for(let i = 0; i < 100000; i++) {
+      let bleh = encoder.encode(JSON.stringify(results))
+      let bleh2 = JSON.parse(decoder.decode(bleh))
+    }
+    console.log(performance.now() - t0);
+  }
+
+  test2(results: AvatarPrediction) {
+    let t0 = performance.now()
+    const avatarCoder = new AvatarCoder()
+
+
+    for(let i = 0; i < 100000; i++) {
+      const data = avatarCoder.encode(results);
+      let prediction = avatarCoder.decode(data)
+    }
+    console.log(performance.now() - t0);
   }
 }
