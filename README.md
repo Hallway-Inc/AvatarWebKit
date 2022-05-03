@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="50%" height="auto" src="docs/assets/tryMe.gif">
+  <img width="33%" height="auto" src="docs/assets/tryMe.gif">
   <h1 align="center">
     AvatarWebKit by Hallway
   </h1>
@@ -10,7 +10,7 @@ AvatarWebKit is an SDK developed by [Hallway](joinhallway.com) optimized for the
 In the future, the SDK will be able to provide rigid body frame and hand positions as well.
 
 <p align="center">
-  <img width="50%" height="auto" src="docs/assets/demo.gif">
+  <img width="66%" height="auto" src="docs/assets/demo.gif">
 </p>
 
 Hallway drives their avatar technology using Machine Learning models that predict highly accurate blend shapes from images & video feeds in real-time. The ML pipeline is optimized for real-time video to achieve both high framerate and lifelike animations.
