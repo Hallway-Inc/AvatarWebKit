@@ -1,95 +1,130 @@
-# [![icon (1)](https://user-images.githubusercontent.com/17056600/165365600-c03a8560-1615-4308-ba46-d5df434e2dcc.png) joinhallway.com](https://joinhallway.com/)
+<p align="center">
+  <img width="33%" height="auto" src="docs/assets/tryMe.gif">
+  <h1 align="center">
+    AvatarWebKit by Hallway
+  </h1>
+</p>
 
-# AvatarWebKit
-Produces highly accurate animation blendshapes using machine learning given a video stream or image
+AvatarWebKit is an SDK developed by <a href="https://joinhallway.com" target="_blank" rel="noopener noreferrer">Hallway</a> optimized for the web that provides real-time blend shapes from a camera feed, video or image. The SDK also gives head XY position, depth (Z) and rotation (pitch, roll, yaw) for each frame. AvatarWebKit runs at 60 FPS, and provides ARKit-compatible 52 blend shapes.
 
-https://user-images.githubusercontent.com/17056600/165352265-ce1be6bc-d0c3-408d-9611-c6a0f948096c.mov
+In the future, the SDK will be able to provide rigid body frame and hand positions as well.
 
-# Getting Started
+<p align="center">
+  <img width="66%" height="auto" src="docs/assets/demo.gif">
+</p>
 
-### What you’ll get from us:
-To use Avatar WebKit you will receive an API Key. The API Key will be used for authentication when initializing the Avatar WebKit at runtime.
+Hallway drives their avatar technology using Machine Learning models that predict highly accurate blend shapes from images & video feeds in real-time. The ML pipeline is optimized for real-time video to achieve both high framerate and lifelike animations.
 
-### Add your API key to your .env file
+Our vision for the future is an "open metaverse" where you can take your character with you anywhere. We believe tools like AvatarWebKit can help pave that road. The models we've provided here are available to use in your applications for free. [Contact us](#contact-us) to get in touch about making your characters compatible with Hallway!
 
-1. Add your key to your .env file
+## Installation
 
-```REACT_APP_AVATAR_WEBKIT_AUTH_TOKEN=xxxxxxxx-XXXX-xxxx-XXXX-xxxxxxxxxxxx```
+```bash
+# yarn
+yarn add @quarkworks-inc/avatar-webkit
 
-2. Next, add the Avatar WebKit module to your package.json:
-
-```npm install @quarkworks-inc/avatar-webkit``` or ```yarn add @quarkworks-inc/avatar-webkit```
-
-
-### Implementation
-
+# npm
+npm install @quarkworks-inc/avatar-webkit
 ```
+
+## First Steps
+
+1. [Get an API token](https://joinhallway.com/sdk/)
+
+2. Start your predictor
+
+```ts
 import { AUPredictor } from '@quarkworks-inc/avatar-webkit'
-...
+// ...
 
 let predictor = new AUPredictor({
-  apiToken: process.env.REACT_APP_AVATAR_WEBKIT_AUTH_TOKEN,
+  apiToken: <YOUR_API_TOKEN>,
   shouldMirrorOutput: true,
 })
 
 let stream = await navigator.mediaDevices.getUserMedia({
-    audio: false,
-    video: {
-      width: { ideal: 640 },
-    	height: { ideal: 360 },
-    	facingMode: 'user'
-    }
+  audio: false,
+  video: {
+    width: { ideal: 640 },
+    height: { ideal: 360 },
+    facingMode: 'user'
+  }
 })
 
 predictor.onPredict = (results => {
-    console.log(results)
+  console.log(results)
 })
 
 // or if you like RX
 predictor.dataStream.subscribe(results => {
-    console.log(results)
+  console.log(results)
 })
 
 predictor.start({ stream })
-
 ```
 
-Now, give this a try! Once the predictor is started, it will take a little bit for the model to warm up. So be patient, if you don’t see any errors right off that is a good thing! You should start seeing the results in the log within at least 10-15 seconds at the most, usually faster.
+# More Docs
+
+https://docs.google.com/document/d/16c3qSYvMi_5l2zXdrsykb2xH6XneOqxTd2wwnEVawxY/edit#
 
 
-# Get your API Key
-1. Click the link below.
-2. Fill out the form with your email.
-3. We will send you your API key!
+# Example Projects
 
-[![Screen Shot 2022-04-26 at 1 01 12 PM](https://user-images.githubusercontent.com/17056600/165363944-9270ffbc-8638-4362-87cc-dd488f6a417b.png)](https://docs.google.com/forms/d/e/1FAIpQLScR957DzGNW-m4SwoZLID_6ykAX9B2oFw0RSyMs2z-zlFeH9Q/viewform)
+### Using AvatarWebKit
+- [Basic example running predictor w/o rendering](examples/blendshapes-only)
+- [Predictor + React + Three.js (basic)](examples/react-app-with-threejs)
+- [Video Call Style UI](examples/render-multiple-avatars)
+- [Using our rendering kit module](examples/hallway-rendering-tools)
 
-# Links to examples
-- [Blendshapes Only](https://github.com/Hallway-Inc/AvatarWebKit/tree/main/examples/blendshapes-only)
-- [React App With Three.js](https://github.com/Hallway-Inc/AvatarWebKit/tree/main/examples/react-app-with-threejs)
-- [RPM Examples](https://github.com/Hallway-Inc/AvatarWebKit/tree/main/examples/ready-player-me-tutorials)
-- [Multiple Avatars](https://github.com/Hallway-Inc/AvatarWebKit/tree/main/examples/render-multiple-avatars)
-- [With Hallway Rendering Tools](https://github.com/Hallway-Inc/AvatarWebKit/tree/main/examples/hallway-rendering-tools)
+### Popular model integrations
+
+- [ReadyPlayerMe Examples](examples/ready-player-me-tutorials)
 
 # FAQ
 
-### What does the Web SDK do?
-The webSDK gives users real-time blendshapes and animation metadata given a video stream or image.
-
-### API Key? What is that and why do I need it?
-An API key is your unique identifier that will allow you to authenticate when using the SDK.
-
-### I’ve added my API Key to my environment, but it’s not working.
-Make sure there aren’t any hidden characters or that the key doesn’t have any typos. You may also need to restart your terminal / environment for the changes to take effect.
+### API Token? What is that and why do I need it?
+An API key is your unique identifier that will allow you to authenticate when using the SDK. [You can sign up for one here.](https://joinhallway.com/sdk)
 
 ### What browsers are supported?
-We recommend Chromium based browsers for best performance, but all other major browsers are supported.
+We recommend Chromium based browsers for best performance, but all other major browsers are supported. We are currently working on performance improvements for Safari, Firefox and Edge.
+
+### Is mobile supported?
+The models will currently run on mobile but need to be optimized. We are working on configuration options which will allow you to choose to run lighter models.
+
+### Do you have any native SDKs?
+
+We do not have an official SDK yet, but our ML pipeline is native-first and the models are used in our Mac OS app [Hallway Tile](https://joinhallway.com). We have the capability to create SDKs for most common platforms (macOS/Windows/Linux, iOS/Android). Each SDK will follow the same data standard for BlendShapes/predictions and will include encoders for portability between environments. This means you can do some creative things between native, web, etc.!
+
+If you are interested in native SDKs, we'd love to hear from you!
+
+### Is this production ready?
+
+Yes, depending on your needs. There may be a couple rough edges at the moment, but the SDK has been in use internally at our company for over 1 year and in production with several pilot companies.
+
+We are currently making no SLAs for the SDK, but we are happy to cooperate with you on any improvements you need to get it going in production. 
+
+### Can I make feature requests?
+
+YES!!! We are in an open beta currently and would love to hear your feedback. [Contact us](#contact-us) on Discord or by email.
 
 ### What’s the best place to reach out for support?
-We are active daily on our [Discord](https://discord.gg/jYCHaMASz7) and can help with any problems you may have! If discord doesn’t work for you, reach out to [sdk@joinhallway.com](mailto:sdk@joinhallway.com)
 
-# AvatarWebKit Rendering
+We are active daily on our  and can help with any problems you may have! If discord doesn’t work for you, reach out to 
 
-If you are looking for some tools to help render things take a look at our rendering repository.
+# Contact Us
+
+Our team is primarily in U.S. timezones, but we are pretty active on Discord and over email! We've love to hear your thoughts, feedback, ideas or provide any support you need.
+
+[Discord](https://discord.gg/jYCHaMASz7)
+
+[contact@joinhallway.com](mailto:contact@joinhallway.com)
+
+[support@joinhallway.com](mailto:support@joinhallway.com)
+
+# Other Hallway Tools
 
 https://github.com/Hallway-Inc/AvatarWebKit-Rendering
+
+If you are using three, we've released this open source tooling module you can import freely. This pairs especially well with video-call style apps, as we provide a three world setup that works well for rendering multiple avatars on screen at once Zoom-style.
+
+[TODO] More coming :)
