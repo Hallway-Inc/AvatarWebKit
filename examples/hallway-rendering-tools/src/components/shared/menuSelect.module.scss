@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.select {
+  background-color: white;
+  border-color: none;
+  border-radius: 35px;
+  border: 1px solid;
+  color: #4a57b9;
+  cursor: pointer;
+  font-family: 'Open Sans Semi Bold', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 13px 40px 13px 40px;
+  position: relative;
+  text-transform: capitalize;
+  transition: 0.2s ease;
+  z-index: 1;
+}
+
+.label {
+  flex-grow: 0;
+  margin-left: 10px;
+  font-size: 0.8rem;
+  color: #444;
+  display: none;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.7rem;
+}

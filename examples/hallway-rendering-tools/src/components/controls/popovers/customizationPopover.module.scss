@@ -1,0 +1,17 @@
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.splotchContainer {
+  display: flex;
+  width: 120px;
+  height: auto;
+  margin: 10px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-items: center;
+}

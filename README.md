@@ -1,7 +1,13 @@
-# [![icon (1)](https://user-images.githubusercontent.com/17056600/165365600-c03a8560-1615-4308-ba46-d5df434e2dcc.png) joinhallway.com](https://joinhallway.com/)
+<p align="center" style="line-height: 50px">
+  <!-- By&nbsp;
+  <img width="100px" height="auto" src="docs/assets/logo.png"> -->
+  <img width="50%" height="auto" src="docs/assets/tryMe.gif">
+  <h1 align="center">
+    AvatarWebKit by Hallway
+  </h1>
+</p>
 
-# AvatarWebKit
-Produces highly accurate animation blendshapes using machine learning given a video stream or image
+AvatarWebKit is an SDK developed by [Hallway](joinhallway.com) that produces highly accurate animation blendshapes using machine learning given a video stream or image
 
 https://user-images.githubusercontent.com/17056600/165352265-ce1be6bc-d0c3-408d-9611-c6a0f948096c.mov
 

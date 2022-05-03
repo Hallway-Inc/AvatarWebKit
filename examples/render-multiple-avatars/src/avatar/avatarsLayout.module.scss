@@ -1,0 +1,113 @@
+.app {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.horizontalContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-items: center;
+  margin: 40px;
+}
+
+.smallAvatar {
+  width: 324px;
+  height: 216px;
+  margin: 10px;
+}
+
+.videoContainer {
+  width: 1280px;
+  height: 720px;
+  position: relative;
+}
+
+.video {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  max-width: 160px;
+  height: auto;
+}
+
+.inActiveContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inActiveContainer video {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.loadingContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonContainer {
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.switchContainer {
+  position: relative;
+}
+
+.deviceSelectContainer {
+  position: relative;
+  margin-left: 20px;
+}
+
+.zStack {
+  position: relative;
+}
+
+.zStack > * {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .app {
+    display: none;
+  }
+
+  .inActiveContainer {
+    display: none;
+  }
+}
