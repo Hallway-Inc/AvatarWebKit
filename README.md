@@ -5,7 +5,7 @@
   </h1>
 </p>
 
-AvatarWebKit is an SDK developed by [Hallway](joinhallway.com) optimized for the web that provides real-time blend shapes from a camera feed, video or image. The SDK also gives head XY position, depth (Z) and rotation (pitch, roll, yaw) for each frame. AvatarWebKit runs at 60 FPS, and provides ARKit-compatible 52 blend shapes.
+AvatarWebKit is an SDK developed by [Hallway](https://joinhallway.com) optimized for the web that provides real-time blend shapes from a camera feed, video or image. The SDK also gives head XY position, depth (Z) and rotation (pitch, roll, yaw) for each frame. AvatarWebKit runs at 60 FPS, and provides ARKit-compatible 52 blend shapes.
 
 In the future, the SDK will be able to provide rigid body frame and hand positions as well.
 
@@ -15,7 +15,7 @@ In the future, the SDK will be able to provide rigid body frame and hand positio
 
 Hallway drives their avatar technology using Machine Learning models that predict highly accurate blend shapes from images & video feeds in real-time. The ML pipeline is optimized for real-time video to achieve both high framerate and lifelike animations.
 
-Our vision for the future is an "open metaverse" where you can take your character with you anywhere. We believe tools like AvatarWebKit can help pave that road. The models we've provided here are available to use in your applications for free. [Contact us]() to get in touch about making your characters compatible with Hallway!
+Our vision for the future is an "open metaverse" where you can take your character with you anywhere. We believe tools like AvatarWebKit can help pave that road. The models we've provided here are available to use in your applications for free. [Contact us](#contact-us) to get in touch about making your characters compatible with Hallway!
 
 ## Installation
 
@@ -71,19 +71,19 @@ https://docs.google.com/document/d/16c3qSYvMi_5l2zXdrsykb2xH6XneOqxTd2wwnEVawxY/
 # Example Projects
 
 ### Using AvatarWebKit
-- [Basic example running predictor w/o rendering](https://github.com/Hallway-Inc/AvatarWebKit/tree/main/examples/blendshapes-only)
-- [Predictor + React + Three.js (basic)](https://github.com/Hallway-Inc/AvatarWebKit/tree/main/examples/react-app-with-threejs)
-- [Video Call Style UI](https://github.com/Hallway-Inc/AvatarWebKit/tree/main/examples/render-multiple-avatars)
-- [Using our rendering kit module](https://github.com/Hallway-Inc/AvatarWebKit/tree/main/examples/hallway-rendering-tools)
+- [Basic example running predictor w/o rendering](examples/blendshapes-only)
+- [Predictor + React + Three.js (basic)](examples/react-app-with-threejs)
+- [Video Call Style UI](examples/render-multiple-avatars)
+- [Using our rendering kit module](examples/hallway-rendering-tools)
 
 ### Popular model integrations
 
-- [ReadyPlayerMe Examples](https://github.com/Hallway-Inc/AvatarWebKit/tree/main/examples/ready-player-me-tutorials)
+- [ReadyPlayerMe Examples](examples/ready-player-me-tutorials)
 
 # FAQ
 
 ### API Token? What is that and why do I need it?
-An API key is your unique identifier that will allow you to authenticate when using the SDK.
+An API key is your unique identifier that will allow you to authenticate when using the SDK. [You can sign up for one here.](https://joinhallway.com/sdk)
 
 ### What browsers are supported?
 We recommend Chromium based browsers for best performance, but all other major browsers are supported. We are currently working on performance improvements for Safari, Firefox and Edge.
@@ -93,7 +93,7 @@ The models will currently run on mobile but need to be optimized. We are working
 
 ### Do you have any native SDKs?
 
-We do not have an official SDK yet, but our ML pipeline is native-first and the models are used in our Mac OS app [Hallway Tile](joinhallway.com). We have the capaibility to create SDKs for most common platforms (macOS/Windows/Linux, iOS/Android). Each SDK will follow the same data standard for BlendShapes/predictions and will include encoders for portability between environments. This means you can do some creative things between native, web, etc.!
+We do not have an official SDK yet, but our ML pipeline is native-first and the models are used in our Mac OS app [Hallway Tile](https://joinhallway.com). We have the capability to create SDKs for most common platforms (macOS/Windows/Linux, iOS/Android). Each SDK will follow the same data standard for BlendShapes/predictions and will include encoders for portability between environments. This means you can do some creative things between native, web, etc.!
 
 If you are interested in native SDKs, we'd love to hear from you!
 
@@ -105,11 +105,21 @@ We are currently making no SLAs for the SDK, but we are happy to cooperate with 
 
 ### Can I make feature requests?
 
-YES!!! We are in an open beta currently and would love to hear your feedback. [Discord](https://discord.gg/jYCHaMASz7) or [contact@joinhallway.com](mailto:contact@joinhallway.com) are the best places to reach us.
+YES!!! We are in an open beta currently and would love to hear your feedback. [Contact us](#contact-us) on Discord or by email.
 
 ### What’s the best place to reach out for support?
 
-We are active daily on our [Discord](https://discord.gg/jYCHaMASz7) and can help with any problems you may have! If discord doesn’t work for you, reach out to [support@joinhallway.com](mailto:support@joinhallway.com)
+We are active daily on our  and can help with any problems you may have! If discord doesn’t work for you, reach out to 
+
+# Contact Us
+
+Our team is primarily in U.S. timezones, but we are pretty active on Discord and over email! We've love to hear your thoughts, feedback, ideas or provide any support you need.
+
+[Discord](https://discord.gg/jYCHaMASz7)
+
+[contact@joinhallway.com](mailto:contact@joinhallway.com)
+
+[support@joinhallway.com](mailto:support@joinhallway.com)
 
 # Other Hallway Tools
 
