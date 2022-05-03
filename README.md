@@ -5,7 +5,7 @@
   </h1>
 </p>
 
-AvatarWebKit is an SDK developed by [Hallway](https://joinhallway.com) optimized for the web that provides real-time blend shapes from a camera feed, video or image. The SDK also gives head XY position, depth (Z) and rotation (pitch, roll, yaw) for each frame. AvatarWebKit runs at 60 FPS, and provides ARKit-compatible 52 blend shapes.
+AvatarWebKit is an SDK developed by <a href="https://joinhallway.com" target="_blank" rel="noopener noreferrer">Hallway</a> optimized for the web that provides real-time blend shapes from a camera feed, video or image. The SDK also gives head XY position, depth (Z) and rotation (pitch, roll, yaw) for each frame. AvatarWebKit runs at 60 FPS, and provides ARKit-compatible 52 blend shapes.
 
 In the future, the SDK will be able to provide rigid body frame and hand positions as well.
 
