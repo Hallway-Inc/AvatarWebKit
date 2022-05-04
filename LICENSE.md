@@ -24,7 +24,7 @@ the asset is produced by us or by you, as a Provider and licensor.
 Your use is expressly conditioned on your acceptance of the Agreement
 contained herein. By accepting, you are agreeing with other applicable
 terms and conditions of Hallway and QuarkWorks, Inc., our [SDK Terms
-of Service](https://joinhallway.com/sdk/terms-of-service) and acknowledging our [Privacy Policy](https://joinhallway.com/sdk/privacy-policy/).
+of Service](https://joinhallway.com/legal/sdk/terms-of-service) and acknowledging our [Privacy Policy](https://joinhallway.com/legal/sdk/privacy-policy/).
 This Agreement, the Terms of Service, and the Privacy Policy are,
 collectively, the “Terms”. The SDK is protected by copyright laws and
 international copyright treaties, as well as other intellectual
