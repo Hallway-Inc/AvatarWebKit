@@ -109,11 +109,11 @@ YES!!! We are in an open beta currently and would love to hear your feedback. [C
 
 ### What’s the best place to reach out for support?
 
-We are active daily on our  and can help with any problems you may have! If discord doesn’t work for you, reach out to 
+We are active daily on our Discord channel and can help with any problems you may have! If discord doesn’t work for you, reach out to us via emails listed below.
 
 # Contact Us
 
-Our team is primarily in U.S. timezones, but we are pretty active on Discord and over email! We've love to hear your thoughts, feedback, ideas or provide any support you need.
+Our team is primarily in U.S. timezones, but we are pretty active on Discord and over email! We'd love to hear your thoughts, feedback, ideas or provide any support you need.
 
 [Discord](https://discord.gg/jYCHaMASz7)
 
