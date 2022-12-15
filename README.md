@@ -1,9 +1,11 @@
 <p align="center">
   <img width="33%" height="auto" src="docs/assets/tryMe.gif">
   <h1 align="center">
-    AvatarWebKit by Hallway
+    ARCHIVED - AvatarWebKit by Hallway
   </h1>
 </p>
+
+**This repository is no longer active and SDK token access has been suspended. Our SDK is no longer publically available. Thank you for using AvatarWebKit.**
 
 AvatarWebKit is an SDK, developed by <a href="https://joinhallway.com" target="_blank" rel="noopener noreferrer">Hallway</a>, optimized for the web that provides real-time blend shapes from a camera feed, video or image. The SDK also gives head X/Y position, depth (Z) and rotation (pitch, roll, yaw) for each frame. AvatarWebKit runs at 60 FPS and provides ARKit-compatible 52 blend shapes.
 
