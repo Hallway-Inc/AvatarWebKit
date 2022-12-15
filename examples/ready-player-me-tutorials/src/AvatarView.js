@@ -37,7 +37,7 @@ export class AvatarView extends React.Component {
         this.scene.environment = background
         this.scene.background = background
 
-        this.loadModel()
+        await this.loadModel()
 
         this.renderer.setAnimationLoop(this.renderScene.bind(this))
 
